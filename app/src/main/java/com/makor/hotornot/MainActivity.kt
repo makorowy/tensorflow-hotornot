@@ -6,7 +6,7 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v7.app.AppCompatActivity
-import com.makor.hotornot.classifier.Classifier
+import com.makor.hotornot.classifier.*
 import com.makor.hotornot.classifier.tensorflow.ImageClassifierFactory
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -28,11 +28,11 @@ class MainActivity : AppCompatActivity() {
     private fun createClassifier() {
         classifier = ImageClassifierFactory.create(
                 assets,
-                "",
-                "",
-                0,
-                "",
-                ""
+                GRAPH_FILE_PATH,
+                LABELS_FILE_PATH,
+                IMAGE_SIZE,
+                GRAPH_INPUT_NAME,
+                GRAPH_OUTPUT_NAME
         )
     }
 
