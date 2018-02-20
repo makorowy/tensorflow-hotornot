@@ -6,6 +6,8 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v7.app.AppCompatActivity
+import com.makor.hotornot.classifier.Classifier
+import com.makor.hotornot.classifier.tensorflow.ImageClassifierFactory
 import kotlinx.android.synthetic.main.activity_main.*
 
 private const val REQUEST_TAKE_PICTURE = 1
@@ -13,11 +15,25 @@ private const val EXTRAS_DATA = "data"
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var classifier: Classifier
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        createClassifier()
         takePicture()
+    }
+
+    private fun createClassifier() {
+        classifier = ImageClassifierFactory.create(
+                assets,
+                "",
+                "",
+                0,
+                "",
+                ""
+        )
     }
 
     private fun takePicture() {
