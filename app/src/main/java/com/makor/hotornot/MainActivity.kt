@@ -2,12 +2,14 @@ package com.makor.hotornot
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v7.app.AppCompatActivity
-import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_main.*
 
 private const val REQUEST_TAKE_PICTURE = 1
+private const val EXTRAS_DATA = "data"
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val extras = data?.extras
         if (requestCode == REQUEST_TAKE_PICTURE && resultCode == Activity.RESULT_OK && extras != null) {
-            Toast.makeText(this, "Picture taken!", Toast.LENGTH_SHORT).show()
+            imagePhoto.setImageBitmap(extras.get(EXTRAS_DATA) as Bitmap)
         }
     }
 }
