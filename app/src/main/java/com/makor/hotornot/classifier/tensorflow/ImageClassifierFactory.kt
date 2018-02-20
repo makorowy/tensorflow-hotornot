@@ -2,6 +2,7 @@ package com.makor.hotornot.classifier.tensorflow
 
 import android.content.res.AssetManager
 import com.makor.hotornot.classifier.Classifier
+import com.makor.hotornot.utils.FileUtils.getLabels
 import org.tensorflow.contrib.android.TensorFlowInferenceInterface
 
 object ImageClassifierFactory {
@@ -15,7 +16,7 @@ object ImageClassifierFactory {
             outputName: String
     ): Classifier {
 
-        val labels = listOf<String>()
+        val labels = getLabels(assetManager, labelsFilePath)
 
         return ImageClassifier(
                 inputName,
