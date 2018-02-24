@@ -17,7 +17,32 @@ Flow of the app is pretty simple:
 
 ### Code structure
 
+The app consists of two main components:
+1. `MainActivity` which is responsible for taking a photo.
+2. `ImageClassifier` which classifies the photo.
 
+### CLassifier
+
+`ImageClassifier` properties:
+- `inputName` - the name of the classifier's input (the photo pixels goes in there),
+- `outputName` - the name of the classifier's output (the results can be found there),
+- `imageSize` - the size of the photo,
+- `labels` - the list of the labels (in our case "hot" and "not"),
+- `imageBitmapPixels` - the array with bitmap pixels (int values before normalization),
+- `imageNormalizedPixels` - the array with normalized pixels,
+- `results` - the list with the results,
+- `tensorFlowInference` - the TensorFlow API object (which is used for inference).
+
+### Classification process
+
+For classifing photos the app is using retrained [MobileNet](https://github.com/tensorflow/models/blob/master/research/slim/nets/mobilenet_v1.md) model. The model can be found inside the `assets` folder together with the labels file.
+
+Before classification the photo needs to be prepared to fit the input of the classifier which is 224x224 pixels. Becouse of that the photo is resized and cropped - this is happening inside the `ImageUtils`.
+
+The prepared photo is passed to the `ImageClassifier`. The class responsibilities are as follows:
+1. Nomalizing pixels of the photo - `preprocessImageToNormalizedFloats()` method.
+2. Classifying - `classifyImageToOutputs()` method.
+3. Getting the results - `getResults()` method.
 
 <br/>
 
