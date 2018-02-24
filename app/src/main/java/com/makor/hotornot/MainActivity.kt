@@ -3,9 +3,11 @@ package com.makor.hotornot
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Environment
+import android.os.Handler
 import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
@@ -22,6 +24,7 @@ private const val REQUEST_TAKE_PICTURE = 2
 
 class MainActivity : AppCompatActivity() {
 
+    private val handler = Handler()
     private lateinit var classifier: Classifier
     private var photoFilePath = ""
 
@@ -91,12 +94,27 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val file = File(photoFilePath)
-        if (requestCode == REQUEST_TAKE_PICTURE) {
-            if (file.exists()) {
-                val bitmap = BitmapFactory.decodeFile(file.absolutePath)
-                val croppedBitmap = getCroppedBitmap(bitmap)
-                imagePhoto.setImageBitmap(croppedBitmap)
-            }
+        if (requestCode == REQUEST_TAKE_PICTURE && file.exists()) {
+            classifyPhoto(file)
         }
+    }
+
+    private fun classifyPhoto(file: File) {
+        val photoBitmap = BitmapFactory.decodeFile(file.absolutePath)
+        val croppedBitmap = getCroppedBitmap(photoBitmap)
+        classifyAndShowResult(croppedBitmap)
+        imagePhoto.setImageBitmap(photoBitmap)
+    }
+
+    private fun classifyAndShowResult(croppedBitmap: Bitmap) {
+        runInBackground(
+                Runnable {
+                    val result = classifier.recognizeImage(croppedBitmap)
+                })
+    }
+
+    @Synchronized
+    private fun runInBackground(runnable: Runnable) {
+        handler.post(runnable)
     }
 }
