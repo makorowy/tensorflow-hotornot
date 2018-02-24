@@ -110,11 +110,26 @@ class MainActivity : AppCompatActivity() {
         runInBackground(
                 Runnable {
                     val result = classifier.recognizeImage(croppedBitmap)
+                    showResult(result)
                 })
     }
 
     @Synchronized
     private fun runInBackground(runnable: Runnable) {
         handler.post(runnable)
+    }
+
+    private fun showResult(result: Result) {
+        textResult.text = result.result.toUpperCase()
+        layoutContainer.setBackgroundColor(getColorFromResult(result.result))
+    }
+
+    @Suppress("DEPRECATION")
+    private fun getColorFromResult(result: String): Int {
+        return if (result == getString(R.string.hot)) {
+            resources.getColor(R.color.hot)
+        } else {
+            resources.getColor(R.color.not)
+        }
     }
 }
