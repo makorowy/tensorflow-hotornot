@@ -45,15 +45,23 @@ Prepared photo is passed to the `ImageClassifier`. The class responsibilities ar
 3. Getting the results - `getResults()` method.
 
 For the classification process the instance of the `TensorFlowInferenceInterface` is used. The classification looks as follows:
-1. Put the data to the classifier:<br/>
+1. Put the data to the classifier:
+<br/>
 
 `tensorFlowInference.feed(inputName, imageNormalizedPixels, 1L, imageSize, imageSize, COLOR_CHANNELS.toLong())`
-2. Run the classifier:<br/>
+
+<br/>
+2. Run the classifier:
+<br/>
 
 `tensorFlowInference.run(arrayOf(outputName), ENABLE_LOG_STATS)`
+
+<br/>
 3. Get the results from the output:<br/>
 
 `tensorFlowInference.fetch(outputName, results)`
+
+<br/>
 
 The results are then passed to the `MainActivity` and shown on the screen.
 
