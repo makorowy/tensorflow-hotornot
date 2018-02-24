@@ -2,6 +2,6 @@
 This is an example of how to use TensorFlow library to classify images.
 
 <div align="center">
-<a href="https://imgflip.com/i/257ush"><img width="100" height="100" src="https://i.imgflip.com/257ush.jpg" title="made at imgflip.com"/></a>
-<a href="https://imgflip.com/i/257uv9"><img src="https://i.imgflip.com/257uv9.jpg" title="made at imgflip.com"/></a>
+<a href="https://imgflip.com/i/257ush"><img width="540" height="960" src="https://i.imgflip.com/257ush.jpg" title="made at imgflip.com"/></a>
+<a href="https://imgflip.com/i/257uv9"><img width="540" height="960" src="https://i.imgflip.com/257uv9.jpg" title="made at imgflip.com"/></a>
 </div>
