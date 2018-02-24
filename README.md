@@ -55,4 +55,4 @@ For the classification process the instance of the `TensorFlowInferenceInterface
 The results are then passed to the `MainActivity` and shown on the screen.
 
 ## License
-
+[Apache 2.0](https://github.com/makorowy/tensorflow-hotornot/blob/master/LICENCE)
