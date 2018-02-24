@@ -12,6 +12,8 @@ import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
 import com.makor.hotornot.classifier.*
 import com.makor.hotornot.classifier.tensorflow.ImageClassifierFactory
 import com.makor.hotornot.uri.UriRetriever.getUriFromFilePath
@@ -48,7 +50,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun init() {
         createClassifier()
-        takePicture()
+        takePhoto()
     }
 
     private fun requestPermissions() {
@@ -68,7 +70,7 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    private fun takePicture() {
+    private fun takePhoto() {
         photoFilePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).absolutePath + "/${System.currentTimeMillis()}.jpg"
         val currentPhotoUri = getUriFromFilePath(this, photoFilePath)
 
@@ -91,6 +93,20 @@ class MainActivity : AppCompatActivity() {
 
     private fun arePermissionGranted(grantResults: IntArray) =
             grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.activity_main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return if (item.itemId == R.id.take_photo) {
+            takePhoto()
+            true
+        } else {
+            super.onOptionsItemSelected(item)
+        }
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val file = File(photoFilePath)
