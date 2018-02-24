@@ -35,7 +35,7 @@ The app consists of two main components:
 
 ### Classification process
 
-For classifing photos the app is using retrained [MobileNet](https://github.com/tensorflow/models/blob/master/research/slim/nets/mobilenet_v1.md) model. The model can be found inside the `assets` folder together with the labels file.
+For classifying photos the app is using retrained [MobileNet](https://github.com/tensorflow/models/blob/master/research/slim/nets/mobilenet_v1.md) model. The model can be found inside the `assets` folder together with the labels file.
 
 Before classification the photo needs to be prepared to fit the input of the classifier which is 224x224 pixels. Because of that the photo is resized and cropped which is happening inside the `ImageUtils`.
 
@@ -46,13 +46,16 @@ Prepared photo is passed to the `ImageClassifier`. The class responsibilities ar
 
 For the classification process the instance of the `TensorFlowInferenceInterface` is used. The classification looks as follows:
 1. Put the data to the classifier:
+<br/>
 `tensorFlowInference.feed(inputName, imageNormalizedPixels, 1L, imageSize, imageSize, COLOR_CHANNELS.toLong())`
 2. Run the classifier:
+<br/>
 `tensorFlowInference.run(arrayOf(outputName), ENABLE_LOG_STATS)`
 3. Get the results from the output:
+<br/>
 `tensorFlowInference.fetch(outputName, results)`
 
 The results are then passed to the `MainActivity` and shown on the screen.
 
 ## License
-[MIT](https://github.com/pszklarska/LiveDataBinding/blob/master/LICENSE)
+
