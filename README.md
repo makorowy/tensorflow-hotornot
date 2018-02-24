@@ -46,9 +46,7 @@ Prepared photo is passed to the `ImageClassifier`. The class responsibilities ar
 
 For the classification process the instance of the `TensorFlowInferenceInterface` is used. The classification looks as follows:
 1. Put the data to the classifier:
-<br/>
-
-`tensorFlowInference.feed(inputName, imageNormalizedPixels, 1L, imageSize, imageSize, COLOR_CHANNELS.toLong())`
+<br/> `tensorFlowInference.feed(inputName, imageNormalizedPixels, 1L, imageSize, imageSize, COLOR_CHANNELS.toLong())`
 <br/>
 2. Run the classifier:
 <br/>
