@@ -5,6 +5,8 @@ import com.makor.hotornot.classifier.COLOR_CHANNELS
 import com.makor.hotornot.classifier.Classifier
 import com.makor.hotornot.classifier.Result
 import org.tensorflow.contrib.android.TensorFlowInferenceInterface
+import java.lang.Float
+import java.util.*
 
 private const val ENABLE_LOG_STATS = false
 
@@ -22,7 +24,8 @@ class ImageClassifier (
     override fun recognizeImage(bitmap: Bitmap): Result {
         preprocessImageToNormalizedFloats(bitmap)
         classifyImageToOutputs()
-        return Result("", 0.0f)
+        val outputQueue = getResults()
+        return outputQueue.poll()
     }
 
     private fun preprocessImageToNormalizedFloats(bitmap: Bitmap) {
@@ -44,5 +47,18 @@ class ImageClassifier (
                 1L, imageSize, imageSize, COLOR_CHANNELS.toLong())
         tensorFlowInference.run(arrayOf(outputName), ENABLE_LOG_STATS)
         tensorFlowInference.fetch(outputName, results)
+    }
+
+    private fun getResults(): PriorityQueue<Result> {
+        val outputQueue = createOutputQueue()
+        results.indices.mapTo(outputQueue) { Result(labels[it], results[it]) }
+        return outputQueue
+    }
+
+    private fun createOutputQueue(): PriorityQueue<Result> {
+        return PriorityQueue(
+                2,
+                Comparator { (_, rConfidence), (_, lConfidence) ->
+                    Float.compare(lConfidence, rConfidence) })
     }
 }
