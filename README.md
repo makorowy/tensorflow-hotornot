@@ -11,9 +11,9 @@ This is an example of how to use [TensorFlow](https://www.tensorflow.org/) libra
 ## Usage
 
 Flow of the app is pretty simple:
-1. First of all we're taking a photo.
-2. The next step is to classify if it's hot or not.
-3. At the end we're showing the results and we can take another photo.
+1. Take a photo.
+2. Classify if it's hot or not.
+3. Show the results.
 
 ### Code structure
 
@@ -21,7 +21,7 @@ The app consists of two main components:
 1. `MainActivity` which is responsible for taking a photo.
 2. `ImageClassifier` which classifies the photo.
 
-### CLassifier
+### Classifier
 
 `ImageClassifier` properties:
 - `inputName` - the name of the classifier's input (the photo pixels goes in there),
@@ -37,12 +37,20 @@ The app consists of two main components:
 
 For classifing photos the app is using retrained [MobileNet](https://github.com/tensorflow/models/blob/master/research/slim/nets/mobilenet_v1.md) model. The model can be found inside the `assets` folder together with the labels file.
 
-Before classification the photo needs to be prepared to fit the input of the classifier which is 224x224 pixels. Becouse of that the photo is resized and cropped - this is happening inside the `ImageUtils`.
+Before classification the photo needs to be prepared to fit the input of the classifier which is 224x224 pixels. Because of that the photo is resized and cropped which is happening inside the `ImageUtils`.
 
-The prepared photo is passed to the `ImageClassifier`. The class responsibilities are as follows:
+Prepared photo is passed to the `ImageClassifier`. The class responsibilities are as follows:
 1. Nomalizing pixels of the photo - `preprocessImageToNormalizedFloats()` method.
 2. Classifying - `classifyImageToOutputs()` method.
 3. Getting the results - `getResults()` method.
+
+For the classification process the instance of the `TensorFlowInferenceInterface` is used. The classification looks as follows:
+1. Feed the data to the classifier:
+`tensorFlowInference.feed(inputName, imageNormalizedPixels, 1L, imageSize, imageSize, COLOR_CHANNELS.toLong())`
+2. Run the classifier:
+`tensorFlowInference.run(arrayOf(outputName), ENABLE_LOG_STATS)`
+3. Get the results from the output:
+`tensorFlowInference.fetch(outputName, results)`
 
 <br/>
 
