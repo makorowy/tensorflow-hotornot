@@ -1,6 +1,7 @@
 package com.makor.hotornot.classifier.tensorflow
 
 import android.content.res.AssetManager
+import com.makor.hotornot.classifier.COLOR_CHANNELS
 import com.makor.hotornot.classifier.Classifier
 import com.makor.hotornot.utils.FileUtils.getLabels
 import org.tensorflow.contrib.android.TensorFlowInferenceInterface
@@ -24,7 +25,7 @@ object ImageClassifierFactory {
                 imageSize.toLong(),
                 labels,
                 IntArray(imageSize * imageSize),
-                FloatArray(imageSize * imageSize * 3),
+                FloatArray(imageSize * imageSize * COLOR_CHANNELS),
                 FloatArray(labels.size),
                 TensorFlowInferenceInterface(assetManager, graphFilePath)
         )

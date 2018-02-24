@@ -1,9 +1,12 @@
 package com.makor.hotornot.classifier.tensorflow
 
 import android.graphics.Bitmap
+import com.makor.hotornot.classifier.COLOR_CHANNELS
 import com.makor.hotornot.classifier.Classifier
 import com.makor.hotornot.classifier.Result
 import org.tensorflow.contrib.android.TensorFlowInferenceInterface
+
+private const val ENABLE_LOG_STATS = false
 
 class ImageClassifier (
         private val inputName: String,
@@ -18,6 +21,7 @@ class ImageClassifier (
 
     override fun recognizeImage(bitmap: Bitmap): Result {
         preprocessImageToNormalizedFloats(bitmap)
+        classifyImageToOutputs()
         return Result("", 0.0f)
     }
 
@@ -33,5 +37,12 @@ class ImageClassifier (
             imageNormalizedPixels[i * 3 + 1] = ((`val` shr 8 and 0xFF) - imageMean) / imageStd
             imageNormalizedPixels[i * 3 + 2] = ((`val` and 0xFF) - imageMean) / imageStd
         }
+    }
+
+    private fun classifyImageToOutputs() {
+        tensorFlowInference.feed(inputName, imageNormalizedPixels,
+                1L, imageSize, imageSize, COLOR_CHANNELS.toLong())
+        tensorFlowInference.run(arrayOf(outputName), ENABLE_LOG_STATS)
+        tensorFlowInference.fetch(outputName, results)
     }
 }
