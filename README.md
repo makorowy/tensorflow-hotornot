@@ -8,6 +8,9 @@ This is an example of how to use [TensorFlow](https://www.tensorflow.org/) libra
 
 <br/>
 
+## Presentation
+The example was created for the presentation purpose which you can find [here](https://github.com/makorowy/tensorflow-hotornot/blob/master/TensorFlow-%20Hot%20or%20Not%20(PL).pdf).
+
 ## Usage
 
 Flow of the app is pretty simple:
