@@ -1,4 +1,4 @@
-package com.makor.hotornot.uri
+package com.makor.hotornot.utils
 
 import android.content.Context
 import android.net.Uri
