@@ -7,7 +7,7 @@ import android.support.v4.content.FileProvider
 import java.io.File
 
 
-object UriRetriever {
+object UriHelper {
 
     fun getUriFromFilePath(context: Context, filePath: String): Uri {
         val file = File(filePath)
