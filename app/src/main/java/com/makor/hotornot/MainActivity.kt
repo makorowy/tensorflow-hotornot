@@ -16,7 +16,7 @@ import android.view.Menu
 import android.view.MenuItem
 import com.makor.hotornot.classifier.*
 import com.makor.hotornot.classifier.tensorflow.ImageClassifierFactory
-import com.makor.hotornot.uri.UriHelper.getUriFromFilePath
+import com.makor.hotornot.uri.getUriFromFilePath
 import com.makor.hotornot.utils.getCroppedBitmap
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
