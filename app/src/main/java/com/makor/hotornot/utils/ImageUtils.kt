@@ -8,21 +8,21 @@ import com.makor.hotornot.classifier.IMAGE_SIZE
 
 fun getCroppedBitmap(bitmap: Bitmap): Bitmap {
     val croppedBitmap = Bitmap.createBitmap(IMAGE_SIZE, IMAGE_SIZE, Bitmap.Config.ARGB_8888)
-    val transformationMatrix = transformPhotoBitmap(bitmap)
+    val transformationMatrix = getPhotoBitmapTransformationMatrix(bitmap)
     val canvas = Canvas(croppedBitmap)
     canvas.drawBitmap(bitmap, transformationMatrix, null)
     return croppedBitmap
 }
 
-private fun transformPhotoBitmap(bitmap: Bitmap): Matrix {
-    val frameToCropTransform = getTransformationMatrix(
+private fun getPhotoBitmapTransformationMatrix(bitmap: Bitmap): Matrix {
+    val frameToCropTransformationMatrix = getTransformationMatrix(
             bitmap.width, bitmap.height,
             IMAGE_SIZE, IMAGE_SIZE,
             0, true)
 
-    val cropToFrameTransform = Matrix()
-    frameToCropTransform.invert(cropToFrameTransform)
-    return frameToCropTransform
+    val cropToFrameTransformationMatrix = Matrix()
+    frameToCropTransformationMatrix.invert(cropToFrameTransformationMatrix)
+    return frameToCropTransformationMatrix
 }
 
 private fun getTransformationMatrix(
