@@ -57,7 +57,7 @@ class ImageClassifier (
 
     private fun createOutputQueue(): PriorityQueue<Result> {
         return PriorityQueue(
-                2,
+                labels.size,
                 Comparator { (_, rConfidence), (_, lConfidence) ->
                     Float.compare(lConfidence, rConfidence) })
     }
