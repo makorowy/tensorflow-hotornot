@@ -3,7 +3,7 @@ package com.makor.hotornot.classifier.tensorflow
 import android.content.res.AssetManager
 import com.makor.hotornot.classifier.COLOR_CHANNELS
 import com.makor.hotornot.classifier.Classifier
-import com.makor.hotornot.utils.FileUtils.getLabels
+import com.makor.hotornot.utils.getLabels
 import org.tensorflow.contrib.android.TensorFlowInferenceInterface
 
 object ImageClassifierFactory {
