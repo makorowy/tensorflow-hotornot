@@ -16,8 +16,8 @@ import android.view.Menu
 import android.view.MenuItem
 import com.makor.hotornot.classifier.*
 import com.makor.hotornot.classifier.tensorflow.ImageClassifierFactory
-import com.makor.hotornot.utils.getUriFromFilePath
 import com.makor.hotornot.utils.getCroppedBitmap
+import com.makor.hotornot.utils.getUriFromFilePath
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 
@@ -38,14 +38,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkPermissions() {
-        if (arePermissionAlreadyGranted()) {
+        if (arePermissionsAlreadyGranted()) {
             init()
         } else {
             requestPermissions()
         }
     }
 
-    private fun arePermissionAlreadyGranted() =
+    private fun arePermissionsAlreadyGranted() =
             ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
 
     private fun init() {
