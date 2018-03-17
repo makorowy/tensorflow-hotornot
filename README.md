@@ -1,5 +1,6 @@
 # TensorFlow - Hot or Not?
-This is an example of how to use [TensorFlow](https://www.tensorflow.org/) library on Android to classify images.
+This is an example of how to use [TensorFlow](https://www.tensorflow.org/) library on Android to classify images. 
+You can find the code explanation in details on [my blog post](https://proandroiddev.com/using-tensorflow-in-android-step-by-step-code-explanation-fee36c281f32).
 
 <div align="center">
 <a href="https://imgflip.com/i/257ush"><img width="270" height="480" src="https://i.imgflip.com/257ush.jpg" title="made at imgflip.com"/></a>
