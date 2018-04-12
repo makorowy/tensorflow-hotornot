@@ -48,15 +48,26 @@ class MainActivity : AppCompatActivity() {
     private fun arePermissionsAlreadyGranted() =
             ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
 
-    private fun init() {
-        createClassifier()
-        takePhoto()
-    }
-
     private fun requestPermissions() {
         ActivityCompat.requestPermissions(this,
                 arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
                 REQUEST_PERMISSIONS)
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        if (requestCode == REQUEST_PERMISSIONS && arePermissionGranted(grantResults)) {
+            init()
+        } else {
+            requestPermissions()
+        }
+    }
+
+    private fun arePermissionGranted(grantResults: IntArray) =
+            grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED
+
+    private fun init() {
+        createClassifier()
+        takePhoto()
     }
 
     private fun createClassifier() {
@@ -82,17 +93,6 @@ class MainActivity : AppCompatActivity() {
             startActivityForResult(takePictureIntent, REQUEST_TAKE_PICTURE)
         }
     }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        if (requestCode == REQUEST_PERMISSIONS && arePermissionGranted(grantResults)) {
-            init()
-        } else {
-            requestPermissions()
-        }
-    }
-
-    private fun arePermissionGranted(grantResults: IntArray) =
-            grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.activity_main_menu, menu)
