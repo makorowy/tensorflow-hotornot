@@ -10,7 +10,7 @@ You can find the code explanation in details on [my blog post](https://proandroi
 <br/>
 
 ## Presentation
-The example was created for the presentation purpose which you can find [here](https://github.com/makorowy/tensorflow-hotornot/blob/master/TensorFlow-%20Hot%20or%20Not%20(PL).pdf).
+The example was created for the presentation purpose which you can find [here](https://github.com/makorowy/tensorflow-hotornot/blob/master/TensorFlow%20-%20HON%20(ENG).pdf).
 
 ## Usage
 
