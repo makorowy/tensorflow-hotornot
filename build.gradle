@@ -4,10 +4,10 @@ buildscript {
                 compileSdk  : 27,
                 targetSdk   : 27,
                 minSdk      : 21,
-                buildTools  : '3.0.1',
-                kotlin      : '1.2.31',
-                support     : '27.0.2',
-                tensorflow  : '1.7.0'
+                buildTools  : '3.1.2',
+                kotlin      : '1.2.41',
+                support     : '27.1.1',
+                tensorflow  : '1.8.0'
         ]
     }
     repositories {
